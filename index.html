@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kashish — Social Media Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+
+:root{
+  --mg:#C43670;
+  --mg-2:#E05A8A;
+  --mg-soft:#F5D0E3;
+  --mg-pale:#FEF2F7;
+  --blush:#FDE8F0;
+  --ink:#1A1A2E;
+  --ink-2:#4A4560;
+  --ink-3:#8A8AA8;
+  --white:#FFFFFF;
+  --off:#FAFAFA;
+  --line:#EDEDED;
+  --max:1100px;
+  --gut:clamp(20px,5vw,64px);
+  --r:'Raleway',sans-serif;
+  --i:'Inter',sans-serif;
+  --m:'JetBrains Mono',monospace;
+}
+
+body{background:var(--white);color:var(--ink);font-family:var(--i);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  height:60px;display:flex;align-items:center;
+  padding:0 var(--gut);
+}
+.nav-inner{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--r);font-size:20px;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.nav-logo em{color:var(--mg);font-style:italic}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-family:var(--i);font-size:13px;color:var(--ink-2);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{color:var(--mg);background:var(--mg-pale)}
+.nav-cta{background:var(--mg)!important;color:var(--white)!important;font-weight:500;padding:8px 18px!important;border-radius:8px!important}
+.nav-cta:hover{background:var(--mg-2)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.burger span{width:22px;height:1.5px;background:var(--ink);display:block}
+.mob-nav{display:none;position:fixed;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--line);padding:16px var(--gut);z-index:99;flex-direction:column;gap:4px}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--i);font-size:14px;color:var(--ink-2);text-decoration:none;padding:10px 12px;border-radius:8px;transition:background .15s}
+.mob-nav a:hover{background:var(--mg-pale);color:var(--mg)}
+
+/* ── HERO ── */
+#hero{
+  padding-top:60px;
+  min-height:100vh;
+  display:flex;align-items:center;
+  background:linear-gradient(135deg,var(--white) 60%,var(--blush) 100%);
+  overflow:hidden;position:relative;
+}
+#hero::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,54,112,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:var(--max);margin:0 auto;padding:60px var(--gut);
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--mg-pale);color:var(--mg);
+  font-family:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 14px;border-radius:999px;margin-bottom:20px;
+  border:1px solid var(--mg-soft);
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mg);flex-shrink:0}
+h1{
+  font-family:var(--r);font-size:clamp(36px,5vw,58px);
+  font-weight:800;line-height:1.08;letter-spacing:-.03em;
+  color:var(--ink);margin-bottom:20px;
+}
+h1 em{color:var(--mg);font-style:italic;font-weight:800}
+.hero-sub{
+  font-family:var(--i);font-size:16px;font-weight:300;color:var(--ink-2);
+  line-height:1.75;max-width:460px;margin-bottom:32px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--mg);color:var(--white);
+  font-family:var(--r);font-size:14px;font-weight:700;
+  padding:13px 28px;border-radius:10px;text-decoration:none;
+  transition:all .2s;letter-spacing:.01em;
+}
+.btn-primary:hover{background:var(--mg-2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(196,54,112,.25)}
+.btn-primary svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);color:var(--ink);
+  font-family:var(--r);font-size:14px;font-weight:600;
+  padding:13px 24px;border-radius:10px;text-decoration:none;
+  border:1.5px solid var(--line);transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--mg);color:var(--mg)}
+.hero-stats{display:flex;gap:28px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap}
+.hstat-n{font-family:var(--r);font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.hstat-l{font-family:var(--i);font-size:12px;color:var(--ink-3);margin-top:3px}
+
+/* hero photo */
+.hero-photo{position:relative}
+.hero-img-wrap{
+  border-radius:24px;overflow:hidden;
+  aspect-ratio:4/5;
+  box-shadow:0 32px 80px rgba(26,26,46,.16);
+  position:relative;
+}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.hero-badge{
+  position:absolute;bottom:24px;left:-20px;
+  background:var(--white);border-radius:14px;
+  padding:14px 18px;box-shadow:0 8px 32px rgba(26,26,46,.12);
+  display:flex;align-items:center;gap:12px;
+  border:1px solid var(--line);
+}
+.badge-icon{
+  width:40px;height:40px;border-radius:10px;background:var(--mg);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.badge-n{font-family:var(--r);font-size:18px;font-weight:800;color:var(--ink);line-height:1}
+.badge-l{font-family:var(--i);font-size:11px;color:var(--ink-3);margin-top:1px}
+.hero-badge-2{
+  position:absolute;top:24px;right:-20px;
+  background:var(--mg);border-radius:14px;
+  padding:12px 16px;box-shadow:0 8px 32px rgba(196,54,112,.3);
+}
+.hb2-n{font-family:var(--r);font-size:20px;font-weight:800;color:var(--white);line-height:1}
+.hb2-l{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.06em;margin-top:2px}
+
+/* ── ABOUT ── */
+#about{background:var(--off);padding:96px 0}
+.about-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-photo-col{position:relative}
+.about-photo-frame{
+  border-radius:20px;overflow:hidden;
+  aspect-ratio:3/4;
+  box-shadow:0 20px 60px rgba(26,26,46,.12);
+}
+.about-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.about-float{
+  position:absolute;bottom:-16px;right:-16px;
+  background:var(--mg);border-radius:14px;
+  padding:16px 20px;box-shadow:0 8px 32px rgba(196,54,112,.3);
+}
+.af-n{font-family:var(--r);font-size:22px;font-weight:800;color:var(--white)}
+.af-l{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.7);letter-spacing:.06em;margin-top:2px}
+
+.sec-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--m);font-size:11px;color:var(--mg);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;
+}
+.sec-tag::before{content:'';width:16px;height:1px;background:var(--mg)}
+h2{font-family:var(--r);font-size:clamp(28px,3.5vw,42px);font-weight:800;color:var(--ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+h2 em{color:var(--mg);font-style:italic}
+.about-p{font-family:var(--i);font-size:15px;color:var(--ink-2);font-weight:300;line-height:1.85;margin-bottom:14px}
+.about-p strong{font-weight:500;color:var(--ink)}
+.about-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chip{
+  padding:6px 14px;border-radius:999px;
+  font-family:var(--i);font-size:12px;font-weight:500;
+  background:var(--mg-pale);color:var(--mg);
+  border:1px solid var(--mg-soft);
+}
+
+/* ── RESULTS STRIP ── */
+.results-strip{background:var(--mg);padding:40px 0}
+.rs-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.rs-cell{padding:0 28px;border-right:1px solid rgba(255,255,255,.18);text-align:center}
+.rs-cell:first-child{padding-left:0;text-align:left}
+.rs-cell:last-child{border-right:none}
+.rs-n{font-family:var(--r);font-size:32px;font-weight:800;color:var(--white);letter-spacing:-.03em;line-height:1}
+.rs-l{font-family:var(--m);font-size:10px;color:rgba(255,255,255,.6);margin-top:6px;letter-spacing:.04em}
+
+/* ── HOW WE WORK ── */
+#process{background:var(--white);padding:96px 0}
+.process-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.process-photo{
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(26,26,46,.10);
+  position:relative;
+}
+.process-photo img{width:100%;display:block;object-fit:cover}
+.process-photo-badge{
+  position:absolute;top:20px;left:20px;
+  background:rgba(255,255,255,.95);border-radius:10px;
+  padding:10px 14px;backdrop-filter:blur(8px);
+  box-shadow:0 4px 16px rgba(26,26,46,.1);
+}
+.ppb-text{font-family:var(--r);font-size:13px;font-weight:700;color:var(--ink)}
+.ppb-sub{font-family:var(--m);font-size:9px;color:var(--ink-3);letter-spacing:.06em;margin-top:1px}
+
+.steps{display:flex;flex-direction:column;gap:0;margin-top:28px}
+.step{
+  display:flex;gap:16px;padding:20px 0;
+  border-bottom:1px solid var(--line);align-items:flex-start;
+}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step-num{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--mg-pale);border:1px solid var(--mg-soft);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--r);font-size:13px;font-weight:800;color:var(--mg);
+  flex-shrink:0;margin-top:2px;
+}
+.step-title{font-family:var(--r);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.step-desc{font-family:var(--i);font-size:13px;color:var(--ink-2);font-weight:300;line-height:1.65}
+
+/* ── WHAT YOU GET ── */
+#deliverables{background:var(--off);padding:96px 0}
+.del-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.del-header{max-width:560px;margin-bottom:48px}
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.del-card{
+  background:var(--white);border-radius:16px;padding:24px;
+  border:1px solid var(--line);transition:all .2s;
+}
+.del-card:hover{border-color:var(--mg-soft);transform:translateY(-3px);box-shadow:0 12px 40px rgba(196,54,112,.08)}
+.del-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--mg-pale);display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:14px;
+}
+.del-title{font-family:var(--r);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.del-desc{font-family:var(--i);font-size:13px;color:var(--ink-2);font-weight:300;line-height:1.65}
+
+/* ── RESULTS ── */
+#results{background:var(--white);padding:96px 0}
+.results-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.results-header{max-width:560px;margin-bottom:48px}
+.phones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:32px}
+.phone{
+  background:var(--ink);border-radius:26px;padding:9px 7px;
+  box-shadow:0 16px 48px rgba(26,26,46,.2);position:relative;
+}
+.phone::before{
+  content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:42px;height:4px;border-radius:3px;background:rgba(255,255,255,.15);
+}
+.ph-screen{background:var(--white);border-radius:18px;overflow:hidden;min-height:260px;display:flex;flex-direction:column;margin-top:14px}
+.ph-bar{background:var(--white);padding:7px 9px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:5px}
+.ph-logo{width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#f58529,#dd2a7b);flex-shrink:0}
+.ph-title{font-family:var(--i);font-size:8px;font-weight:600;color:var(--ink);flex:1}
+.ph-live{width:5px;height:5px;border-radius:50%;background:#2dc653}
+.ph-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);flex:1}
+.ph-cell{background:var(--white);padding:9px 7px}
+.ph-val{font-family:var(--r);font-size:13px;font-weight:800;color:var(--ink);line-height:1;margin-bottom:2px}
+.ph-val.g{color:#2dc653}.ph-val.m{color:var(--mg)}
+.ph-lbl{font-family:var(--m);font-size:6.5px;color:var(--ink-3);letter-spacing:.03em;line-height:1.3}
+.ph-chart{padding:9px;background:var(--mg-pale);display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
+.ph-bars{display:flex;align-items:flex-end;gap:2px;height:48px}
+.ph-b{flex:1;border-radius:2px 2px 0 0;background:var(--mg);opacity:.55}
+.ph-b.hi{opacity:1}
+.ph-chart-lbl{font-family:var(--m);font-size:6.5px;color:var(--mg);letter-spacing:.03em}
+.ph-rg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);flex:1}
+.ph-reel{background:linear-gradient(145deg,var(--mg-soft),var(--mg-pale));display:flex;align-items:flex-end;padding:4px}
+.ph-rv{font-family:var(--i);font-size:6.5px;font-weight:600;color:var(--white);background:rgba(0,0,0,.5);padding:1px 3px;border-radius:2px;display:flex;align-items:center;gap:2px}
+.ph-rv::before{content:'▶';font-size:5px}
+
+/* cases */
+.cases{display:flex;flex-direction:column;gap:8px;margin-top:32px}
+.case{background:var(--off);border-radius:12px;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:border-color .2s}
+.case:hover{border-color:var(--mg-soft)}
+.case.on{border-color:var(--mg);background:var(--white)}
+.case-head{display:flex;align-items:center;gap:14px;padding:18px 22px}
+.c-dot{width:10px;height:10px;border-radius:50%;background:var(--line);flex-shrink:0;transition:background .2s}
+.case.on .c-dot{background:var(--mg)}
+.c-info{flex:1}
+.c-title{font-family:var(--r);font-size:15px;font-weight:700;color:var(--ink)}
+.c-niche{font-family:var(--m);font-size:10px;color:var(--ink-3);letter-spacing:.04em;margin-top:2px}
+.c-result{font-family:var(--r);font-size:15px;font-weight:800;color:var(--mg);flex-shrink:0;margin-right:8px}
+.c-arrow{font-size:16px;color:var(--ink-3);transition:transform .2s}
+.case.on .c-arrow{transform:rotate(90deg);color:var(--mg)}
+.case-body{display:none;padding:0 22px 20px 46px;border-top:1px solid var(--line)}
+.case.on .case-body{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:16px}
+.cb-l{font-family:var(--m);font-size:9px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.cb-t{font-family:var(--i);font-size:13px;color:var(--ink-2);font-weight:300;line-height:1.7}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--off);padding:96px 0}
+.test-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.test-header{max-width:560px;margin-bottom:48px}
+.test-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.test-cards{display:flex;flex-direction:column;gap:14px}
+.test-card{
+  background:var(--white);border-radius:14px;padding:24px;
+  border:1px solid var(--line);position:relative;overflow:hidden;
+}
+.test-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mg);
+}
+.test-q{font-family:var(--i);font-size:14px;color:var(--ink-2);font-weight:300;line-height:1.8;font-style:italic;margin-bottom:16px}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-av{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--r);font-size:13px;font-weight:800;color:var(--white);flex-shrink:0;
+}
+.test-name{font-family:var(--r);font-size:13px;font-weight:700;color:var(--ink)}
+.test-role{font-family:var(--m);font-size:10px;color:var(--ink-3);letter-spacing:.04em;margin-top:1px}
+
+/* photo + dm column */
+.test-photo-col{display:flex;flex-direction:column;gap:16px}
+.test-photo-frame{
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 16px 48px rgba(26,26,46,.10);
+  aspect-ratio:4/5;
+}
+.test-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top}
+.dm-cards{display:flex;flex-direction:column;gap:10px}
+.dm-b{
+  background:var(--ink);border-radius:14px 14px 14px 3px;
+  padding:12px 15px;font-family:var(--i);font-size:13px;
+  color:rgba(255,255,255,.82);line-height:1.65;font-weight:300;
+}
+.dm-b.me{
+  background:var(--mg);border-radius:14px 14px 3px 14px;
+  align-self:flex-end;
+}
+.dm-meta{font-family:var(--m);font-size:9px;color:var(--ink-3);letter-spacing:.04em;margin-top:4px}
+
+/* ── CONTACT ── */
+#contact{background:var(--white);padding:96px 0}
+.contact-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-photo-wrap{
+  position:relative;border-radius:20px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(26,26,46,.10);
+  aspect-ratio:3/4;
+}
+.contact-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.contact-photo-label{
+  position:absolute;bottom:20px;left:20px;right:20px;
+  background:rgba(255,255,255,.95);border-radius:12px;
+  padding:16px 18px;backdrop-filter:blur(8px);
+  box-shadow:0 4px 20px rgba(26,26,46,.1);
+}
+.cpl-text{font-family:var(--r);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.cpl-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--mg);color:var(--white);
+  font-family:var(--r);font-size:13px;font-weight:700;
+  padding:11px;border-radius:8px;text-decoration:none;
+  transition:background .2s;width:100%;
+}
+.cpl-btn:hover{background:var(--mg-2)}
+
+.contact-form-col{}
+.contact-form-col h2{margin-bottom:8px}
+.contact-sub{font-family:var(--i);font-size:15px;color:var(--ink-2);font-weight:300;line-height:1.75;margin-bottom:28px}
+.form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fl{font-family:var(--m);font-size:10px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+.fi{
+  background:var(--off);border:1.5px solid var(--line);border-radius:8px;
+  padding:11px 13px;font-family:var(--i);font-size:14px;color:var(--ink);
+  outline:none;transition:border-color .2s;font-weight:300;width:100%;
+}
+.fi:focus{border-color:var(--mg)}
+.fi::placeholder{color:var(--ink-3)}
+.fi-area{resize:vertical;min-height:100px;line-height:1.6}
+.form-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--mg);color:var(--white);
+  font-family:var(--r);font-size:14px;font-weight:700;
+  padding:13px;border-radius:10px;border:none;cursor:pointer;
+  transition:all .2s;letter-spacing:.01em;margin-top:4px;
+}
+.form-btn:hover{background:var(--mg-2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(196,54,112,.25)}
+.form-success{display:none;background:#edf7ed;border-radius:8px;padding:12px 14px;font-family:var(--m);font-size:11px;color:#2a7a2a;margin-top:8px;letter-spacing:.04em}
+.or-divider{display:flex;align-items:center;gap:10px;margin:4px 0}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.or-divider span{font-family:var(--m);font-size:10px;color:var(--ink-3);letter-spacing:.06em}
+.calendly-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--ink);color:var(--white);
+  font-family:var(--r);font-size:14px;font-weight:700;
+  padding:13px;border-radius:10px;text-decoration:none;
+  transition:background .2s;letter-spacing:.01em;
+}
+.calendly-btn:hover{background:#2d2d4a}
+
+/* footer */
+footer{background:var(--ink);padding:28px 0}
+.foot{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-logo{font-family:var(--r);font-size:18px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.foot-logo em{color:var(--mg-2);font-style:italic}
+.foot-links{display:flex;gap:20px;list-style:none}
+.foot-links a{font-family:var(--m);font-size:10px;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--mg-2)}
+.foot-copy{font-family:var(--m);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.v{opacity:1;transform:none}
+
+/* mobile */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .hero-inner{grid-template-columns:1fr;gap:36px;padding:40px var(--gut)}
+  .hero-photo{order:-1}
+  .hero-badge{left:8px;bottom:16px}
+  .hero-badge-2{right:8px;top:16px}
+  .about-inner{grid-template-columns:1fr;gap:36px}
+  .about-photo-col{display:none}
+  .rs-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .process-inner{grid-template-columns:1fr;gap:36px}
+  .del-grid{grid-template-columns:1fr}
+  .phones-grid{grid-template-columns:1fr 1fr}
+  .case.on .case-body{grid-template-columns:1fr}
+  .test-layout{grid-template-columns:1fr;gap:32px}
+  .contact-inner{grid-template-columns:1fr;gap:36px}
+  .contact-photo-wrap{aspect-ratio:4/3}
+  .form-row{grid-template-columns:1fr}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Kashish<em>.</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">How it works</a></li>
+      <li><a href="#deliverables">What you get</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#testimonials">Clients</a></li>
+      <li><a href="https://calendly.com/sociallykashish/15min" target="_blank" class="nav-cta">Book a call</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#process" onclick="closeMob()">How it works</a>
+  <a href="#deliverables" onclick="closeMob()">What you get</a>
+  <a href="#results" onclick="closeMob()">Results</a>
+  <a href="#testimonials" onclick="closeMob()">Clients</a>
+  <a href="https://calendly.com/sociallykashish/15min" target="_blank" onclick="closeMob()">Book a free call →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">Social Media Strategist · Delhi, India</div>
+      <h1>Your brand,<br>finally <em>working</em><br>for you.</h1>
+      <p class="hero-sub">I help coaches, service brands, and businesses build a social media presence that doesn't just look good — it brings in real clients, consistently.</p>
+      <div class="hero-btns">
+        <a href="https://calendly.com/sociallykashish/15min" target="_blank" class="btn-primary">
+          Book a free 15-min call
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+        </a>
+        <a href="#results" class="btn-secondary">See the results</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hstat-n">726K+</div><div class="hstat-l">accounts reached</div></div>
+        <div><div class="hstat-n">1.2M</div><div class="hstat-l">reel plays</div></div>
+        <div><div class="hstat-n">+1,480%</div><div class="hstat-l">engagement growth</div></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="hero-img-wrap">
+        <img src="photo-desk.jpg" alt="Kashish at her desk">
+      </div>
+      <div class="hero-badge">
+        <div class="badge-icon">📈</div>
+        <div>
+          <div class="badge-n">+423%</div>
+          <div class="badge-l">reach growth — one client</div>
+        </div>
+      </div>
+      <div class="hero-badge-2">
+        <div class="hb2-n">726K</div>
+        <div class="hb2-l">accounts reached</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-photo-col reveal">
+      <div class="about-photo-frame">
+        <img src="photo-floral.png" alt="Kashish">
+      </div>
+      <div class="about-float">
+        <div class="af-n">Delhi → Global</div>
+        <div class="af-l">Working with brands worldwide</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-tag">About me</div>
+      <h2>Hi, I'm Kashish.<br>Strategy-first, <em>always.</em></h2>
+      <p class="about-p">I help businesses leverage the power of social media to <strong>significantly increase brand visibility, turn consumers into customers,</strong> and build real authority online.</p>
+      <p class="about-p">I'm dedicated to helping businesses in all industries engage with a loyal community of followers. <strong>How can someone buy from you if they don't know you exist?</strong></p>
+      <p class="about-p">From styling brands hitting 1.2M reel plays to fitness coaches building their entire client base from Instagram — I've consistently delivered results that move businesses forward.</p>
+      <div class="about-chips">
+        <span class="chip">Coaches</span>
+        <span class="chip">Service Brands</span>
+        <span class="chip">D2C</span>
+        <span class="chip">Salons</span>
+        <span class="chip">Personal Brands</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS STRIP -->
+<div class="results-strip">
+  <div class="rs-inner">
+    <div class="rs-cell"><div class="rs-n">726K</div><div class="rs-l">accounts reached / month</div></div>
+    <div class="rs-cell"><div class="rs-n">1.2M</div><div class="rs-l">reel plays, one video</div></div>
+    <div class="rs-cell"><div class="rs-n">+1,480%</div><div class="rs-l">engagement growth</div></div>
+    <div class="rs-cell"><div class="rs-n">50%+</div><div class="rs-l">reach increase (minimum)</div></div>
+  </div>
+</div>
+
+<!-- HOW WE WORK -->
+<section id="process">
+  <div class="process-inner">
+    <div class="reveal">
+      <div class="process-photo">
+        <img src="photo-coffee2.jpg" alt="Kashish working">
+        <div class="process-photo-badge">
+          <div class="ppb-text">Your strategy, my work.</div>
+          <div class="ppb-sub">4-week process · fully managed</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-tag">How we work</div>
+      <h2>A clear process,<br>every single <em>month.</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">W1</div>
+          <div>
+            <div class="step-title">Strategy & Planning</div>
+            <div class="step-desc">We gather all information, build a strategy, collect your videos and images, understand your credentials, and map out the full plan before anything goes live.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">W2</div>
+          <div>
+            <div class="step-title">Create & Edit</div>
+            <div class="step-desc">Content is created, edited, reviewed, and refined. Your profile is optimised — bio, highlights, link-in-bio, and visual consistency all sorted.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">W3</div>
+          <div>
+            <div class="step-title">Post & Engage</div>
+            <div class="step-desc">Content goes live on schedule. I actively engage with your audience — responding, community-building, and growing relationships that turn followers into clients.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">W4</div>
+          <div>
+            <div class="step-title">Analyse & Optimise</div>
+            <div class="step-desc">I track what's working, do more outreach, deepen engagement, and compile a clear results report — so you always know exactly what your investment is doing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section id="deliverables">
+  <div class="del-inner">
+    <div class="del-header reveal">
+      <div class="sec-tag">What you get</div>
+      <h2>Everything you need.<br><em>Nothing you don't.</em></h2>
+    </div>
+    <div class="del-grid reveal">
+      <div class="del-card">
+        <div class="del-icon">🎯</div>
+        <div class="del-title">Content Strategy</div>
+        <div class="del-desc">Clear objectives, audience research, competitor analysis, and a platform plan — all aligned to your business goals, not vanity metrics.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">📅</div>
+        <div class="del-title">Monthly Content Calendar</div>
+        <div class="del-desc">A phase-wise content calendar with topics, formats, hooks, and CTAs pre-planned — so nothing is random and every post has a job.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">🎬</div>
+        <div class="del-title">Reels & Video Content</div>
+        <div class="del-desc">Scripted, edited, and ready-to-post reels built around hooks that stop the scroll. This is what drove the 1.2M plays you see above.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">🎨</div>
+        <div class="del-title">Graphics & Carousels</div>
+        <div class="del-desc">On-brand carousels, quote cards, and story graphics — all designed to be consistent, recognisable, and save-worthy.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">💬</div>
+        <div class="del-title">Community Management</div>
+        <div class="del-desc">Active engagement with your audience — replies, DM handling, and outreach. The part most brands skip. The part that actually builds trust.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">📊</div>
+        <div class="del-title">Monthly Report</div>
+        <div class="del-desc">A clear breakdown of reach, impressions, engagement, follower growth, and what's working — delivered at the end of every month.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="results-inner">
+    <div class="results-header reveal">
+      <div class="sec-tag">Results</div>
+      <h2>Real numbers.<br><em>Real clients.</em></h2>
+      <p style="font-family:var(--i);font-size:15px;color:var(--ink-2);font-weight:300;line-height:1.7;margin-top:10px">Actual Instagram analytics from accounts I've managed. Organic only — no paid ads.</p>
+    </div>
+
+    <div class="phones-grid reveal">
+      <div class="phone">
+        <div class="ph-screen">
+          <div class="ph-bar"><div class="ph-logo"></div><span class="ph-title">Dashboard · Apr–May</span><div class="ph-live"></div></div>
+          <div class="ph-stats">
+            <div class="ph-cell"><div class="ph-val m">726K</div><div class="ph-lbl">Accounts Reached</div></div>
+            <div class="ph-cell"><div class="ph-val g">+423%</div><div class="ph-lbl">Reach Growth</div></div>
+            <div class="ph-cell"><div class="ph-val">980K</div><div class="ph-lbl">Impressions</div></div>
+            <div class="ph-cell"><div class="ph-val g">99.3%</div><div class="ph-lbl">Non-follower Reach</div></div>
+          </div>
+          <div class="ph-chart">
+            <div class="ph-bars">
+              <div class="ph-b" style="height:28%"></div><div class="ph-b" style="height:42%"></div>
+              <div class="ph-b" style="height:36%"></div><div class="ph-b" style="height:58%"></div>
+              <div class="ph-b" style="height:52%"></div><div class="ph-b" style="height:74%"></div>
+              <div class="ph-b hi" style="height:100%"></div>
+            </div>
+            <div class="ph-chart-lbl">Apr 6 – May 5, 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="ph-screen">
+          <div class="ph-bar"><div class="ph-logo"></div><span class="ph-title">Insights · Feb–Mar</span><div class="ph-live"></div></div>
+          <div class="ph-stats">
+            <div class="ph-cell"><div class="ph-val m">108K</div><div class="ph-lbl">Accounts Reached</div></div>
+            <div class="ph-cell"><div class="ph-val g">+282%</div><div class="ph-lbl">Reach Growth</div></div>
+            <div class="ph-cell"><div class="ph-val">1.6K</div><div class="ph-lbl">Engaged</div></div>
+            <div class="ph-cell"><div class="ph-val g">+215%</div><div class="ph-lbl">Engagement</div></div>
+          </div>
+          <div class="ph-chart">
+            <div class="ph-bars">
+              <div class="ph-b" style="height:22%"></div><div class="ph-b" style="height:38%"></div>
+              <div class="ph-b" style="height:50%"></div><div class="ph-b" style="height:46%"></div>
+              <div class="ph-b" style="height:68%"></div><div class="ph-b" style="height:84%"></div>
+              <div class="ph-b hi" style="height:100%"></div>
+            </div>
+            <div class="ph-chart-lbl">21 Feb – 21 Mar, 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="ph-screen">
+          <div class="ph-bar"><div class="ph-logo"></div><span class="ph-title">Reel Insights</span><div class="ph-live"></div></div>
+          <div class="ph-stats">
+            <div class="ph-cell"><div class="ph-val m">1.2M</div><div class="ph-lbl">Plays</div></div>
+            <div class="ph-cell"><div class="ph-val">15K</div><div class="ph-lbl">Likes</div></div>
+            <div class="ph-cell"><div class="ph-val m">47K</div><div class="ph-lbl">Shares</div></div>
+            <div class="ph-cell"><div class="ph-val">26K</div><div class="ph-lbl">Saves</div></div>
+          </div>
+          <div class="ph-rg">
+            <div class="ph-reel"><div class="ph-rv">1.2M</div></div>
+            <div class="ph-reel" style="background:linear-gradient(145deg,#1a1a2e,#2d1b35)"><div class="ph-rv">530K</div></div>
+            <div class="ph-reel"><div class="ph-rv">177K</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="ph-screen">
+          <div class="ph-bar"><div class="ph-logo"></div><span class="ph-title">Mar 8 – Apr 6</span><div class="ph-live"></div></div>
+          <div class="ph-stats">
+            <div class="ph-cell"><div class="ph-val m">144K</div><div class="ph-lbl">Accounts Reached</div></div>
+            <div class="ph-cell"><div class="ph-val g">+380%</div><div class="ph-lbl">Follower Growth</div></div>
+            <div class="ph-cell"><div class="ph-val">240K</div><div class="ph-lbl">Impressions</div></div>
+            <div class="ph-cell"><div class="ph-val g">+212%</div><div class="ph-lbl">Growth</div></div>
+          </div>
+          <div class="ph-chart">
+            <div class="ph-bars">
+              <div class="ph-b" style="height:35%"></div><div class="ph-b" style="height:55%"></div>
+              <div class="ph-b" style="height:48%"></div><div class="ph-b" style="height:70%"></div>
+              <div class="ph-b" style="height:62%"></div><div class="ph-b hi" style="height:100%"></div>
+              <div class="ph-b" style="height:88%"></div>
+            </div>
+            <div class="ph-chart-lbl">Mar 8 – Apr 6, 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cases reveal">
+      <div class="case" onclick="toggleCase(this)">
+        <div class="case-head">
+          <div class="c-dot"></div>
+          <div class="c-info"><div class="c-title">Personal Styling Brand</div><div class="c-niche">Fashion · Instagram · India</div></div>
+          <div class="c-result">1.2M plays</div>
+          <div class="c-arrow">›</div>
+        </div>
+        <div class="case-body">
+          <div><div class="cb-l">Situation</div><div class="cb-t">Inconsistent strategy, no clear content theme. Great styling work not reaching new audiences despite regular posting.</div></div>
+          <div><div class="cb-l">What we did</div><div class="cb-t">Rebuilt content strategy around body type styling tips. Consistent visual feed theme. One reel hit 1.2M plays with 47K shares and 26K saves.</div></div>
+          <div><div class="cb-l">Result</div><div class="cb-t">1.2M plays · 15K likes · 47K shares · 26K saves — one single video. Sustained reach growth month on month.</div></div>
+        </div>
+      </div>
+      <div class="case" onclick="toggleCase(this)">
+        <div class="case-head">
+          <div class="c-dot"></div>
+          <div class="c-info"><div class="c-title">The Jordan Collective</div><div class="c-niche">Business · Social Media · US</div></div>
+          <div class="c-result">+43.2% reach</div>
+          <div class="c-arrow">›</div>
+        </div>
+        <div class="case-body">
+          <div><div class="cb-l">Situation</div><div class="cb-t">Needed consistent management handling content, graphics, and audience growth across multiple client brands.</div></div>
+          <div><div class="cb-l">What we did</div><div class="cb-t">Full social media management — strategy, graphic creation, advertising support, audience engagement, and internal team coordination.</div></div>
+          <div><div class="cb-l">Result</div><div class="cb-t">71.4K accounts reached in 30 days · +43.2% reach growth · +51.7% more non-follower accounts reached.</div></div>
+        </div>
+      </div>
+      <div class="case" onclick="toggleCase(this)">
+        <div class="case-head">
+          <div class="c-dot"></div>
+          <div class="c-info"><div class="c-title">Ranjeeta Henry — Fitness Coach</div><div class="c-niche">Coaching · Brand built from zero</div></div>
+          <div class="c-result">Clients from IG</div>
+          <div class="c-arrow">›</div>
+        </div>
+        <div class="case-body">
+          <div><div class="cb-l">Situation</div><div class="cb-t">Expert coach with zero social presence. Needed a brand that attracts and converts clients from Instagram organically.</div></div>
+          <div><div class="cb-l">What we did</div><div class="cb-t">Built the full brand from scratch — content strategy, visual identity, posting schedule, and trust-building content that positioned her as an authority.</div></div>
+          <div><div class="cb-l">Result</div><div class="cb-t">"Her strategies made me attain clients and build my followers. She has been the biggest supporter." — Ranjeeta Henry</div></div>
+        </div>
+      </div>
+      <div class="case" onclick="toggleCase(this)">
+        <div class="case-head">
+          <div class="c-dot"></div>
+          <div class="c-info"><div class="c-title">Nail.ville — Beauty Salon</div><div class="c-niche">Beauty Services · Complete feed redesign</div></div>
+          <div class="c-result">Full redesign</div>
+          <div class="c-arrow">›</div>
+        </div>
+        <div class="case-body">
+          <div><div class="cb-l">Situation</div><div class="cb-t">Beautiful service, chaotic Instagram. Random posts with no brand identity, no content making visitors want to book.</div></div>
+          <div><div class="cb-l">What we did</div><div class="cb-t">Complete feed redesign — nail education, client stories, service reveals, booking CTAs. Consistent visual identity built to match their positioning.</div></div>
+          <div><div class="cb-l">Result</div><div class="cb-t">Transformed profile now driving bookings. Clients arrive ready to book — trust built before the first DM.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="test-inner">
+    <div class="test-header reveal">
+      <div class="sec-tag">What clients say</div>
+      <h2>In their own <em>words.</em></h2>
+    </div>
+    <div class="test-layout">
+      <div class="test-cards reveal">
+        <div class="test-card">
+          <p class="test-q">"I worked with Kashish and I wouldn't hesitate to recommend her services to anyone. She provides extremely valuable and actionable information quickly. She understood my requirements and grew my Instagram engagement in five days."</p>
+          <div class="test-author">
+            <div class="test-av" style="background:#E91E8C">V</div>
+            <div><div class="test-name">Vrinda</div><div class="test-role">Instagram client</div></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <p class="test-q">"Kashish helped me build my brand as a Fitness Coach. Her strategies made me attain clients and build my followers. She has been the biggest supporter and if you want to grow your business you should definitely reach out to her."</p>
+          <div class="test-author">
+            <div class="test-av" style="background:#C43670">R</div>
+            <div><div class="test-name">Ranjeeta Henry</div><div class="test-role">Fitness Coach</div></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <p class="test-q">"Kashish is truly an asset in managing social media for The Jordan Collective. Her advertisements have helped our client's brands reach new audiences and gain new followers which enhanced their engagement. We truly appreciate Kashish."</p>
+          <div class="test-author">
+            <div class="test-av" style="background:#4285F4">C</div>
+            <div><div class="test-name">Cassius Clay</div><div class="test-role">The Jordan Collective</div></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <p class="test-q">"She is amazing with her graphics and was up to date with the trends. She helped me with how to create an IG content strategy for myself and map it out."</p>
+          <div class="test-author">
+            <div class="test-av" style="background:#AF8594">T</div>
+            <div><div class="test-name">Toressa Wilson</div><div class="test-role">Personal Brand</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-photo-col reveal">
+        <div class="test-photo-frame">
+          <img src="photo-sunflower.jpg" alt="Kashish">
+        </div>
+        <div class="dm-cards">
+          <div class="dm-b">"Getting on a call with Kashish was a game-changer for me. She listened to all my queries and answered them with patience. I highly highly recommend Kashish."</div>
+          <div class="dm-b">"It was one of the best consultation calls I'd ever had. She provided detailed insight about my account and content."</div>
+          <div class="dm-b me">even after the call, she gives me advice whenever I get stuck 🩷</div>
+          <div class="dm-meta">DM testimonials · real clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="contact-photo-wrap">
+        <img src="photo-doorway.jpg" alt="Kashish">
+        <div class="contact-photo-label">
+          <div class="cpl-text">Ready to grow? Let's talk — it's free.</div>
+          <a href="https://calendly.com/sociallykashish/15min" target="_blank" class="cpl-btn">
+            📅 Book your free 15-min call
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="sec-tag">Get in touch</div>
+      <h2>Let's grow your<br>brand <em>online.</em></h2>
+      <p class="contact-sub">Tell me about your brand and what you want to achieve. I'll come prepared with honest feedback and a clear plan — no pressure, no pitch.</p>
+
+      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_replyto" value="sociallykashish@gmail.com">
+        <input type="hidden" name="_subject" value="New enquiry from kashish portfolio website">
+        <div class="form-row">
+          <div class="fg">
+            <label class="fl" for="fname">Your name</label>
+            <input class="fi" id="fname" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="fg">
+            <label class="fl" for="femail">Email</label>
+            <input class="fi" id="femail" name="email" type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="fbrand">Brand / Business</label>
+          <input class="fi" id="fbrand" name="brand" type="text" placeholder="What's your brand called?">
+        </div>
+        <div class="fg">
+          <label class="fl" for="fservice">I'm interested in</label>
+          <select class="fi" id="fservice" name="service">
+            <option value="">Choose a service...</option>
+            <option>Social Media Strategy</option>
+            <option>Content Creation & Management</option>
+            <option>1:1 Strategy Consultation</option>
+            <option>Not sure yet — let's talk</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl" for="fmsg">Tell me about your goals</label>
+          <textarea class="fi fi-area" id="fmsg" name="message" placeholder="What's not working right now? What do you want to achieve? Anything helps."></textarea>
+        </div>
+        <button type="submit" class="form-btn">Send enquiry →</button>
+        <div class="form-success" id="fSuccess">✓ Sent! I'll reply within 24 hours. — Kashish</div>
+      </form>
+
+      <div class="or-divider" style="margin-top:16px"><span>or</span></div>
+      <a href="https://calendly.com/sociallykashish/15min" target="_blank" class="calendly-btn" style="margin-top:12px">
+        📅 Skip the form — book a call directly
+      </a>
+
+      <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="mailto:sociallykashish@gmail.com" style="font-family:var(--m);font-size:11px;color:var(--ink-3);text-decoration:none;letter-spacing:.04em">✉ sociallykashish@gmail.com</a>
+        <a href="https://instagram.com/socially.kashish" target="_blank" style="font-family:var(--m);font-size:11px;color:var(--ink-3);text-decoration:none;letter-spacing:.04em">📸 @socially.kashish</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div class="foot-logo">Kashish<em>.</em></div>
+    <ul class="foot-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="https://calendly.com/sociallykashish/15min" target="_blank">Book a call</a></li>
+    </ul>
+    <p class="foot-copy">© 2026 · socially.kashish · Delhi</p>
+  </div>
+</footer>
+
+<script>
+// Burger
+const burger = document.getElementById('burger');
+const mobNav = document.getElementById('mobNav');
+burger.addEventListener('click', () => mobNav.classList.toggle('open'));
+function closeMob(){ mobNav.classList.remove('open') }
+
+// Case accordion
+function toggleCase(card){
+  const open = card.classList.contains('on');
+  document.querySelectorAll('.case').forEach(c => c.classList.remove('on'));
+  if(!open) card.classList.add('on');
+}
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('v'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Form
+document.querySelector('form') && document.querySelector('form').addEventListener('submit', function(e){
+  // Only intercept if no real Formspree ID set yet
+  if(this.action.includes('YOUR_FORM_ID')){
+    e.preventDefault();
+    document.getElementById('fSuccess').style.display = 'block';
+    this.reset();
+  }
+});
+</script>
+</body>
+</html>
