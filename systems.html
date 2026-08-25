@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systems & Tools — Kashish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+:root{
+  --mg:#C43670;--mg-2:#E05A8A;--mg-soft:#F5D0E3;--mg-pale:#FEF2F7;--blush:#FDE8F0;
+  --ink:#1A1A2E;--ink-2:#4A4560;--ink-3:#8A8AA8;--white:#FFFFFF;--off:#FAFAFA;--line:#EDEDED;
+  --max:1100px;--gut:clamp(20px,5vw,64px);
+  --r:'Raleway',sans-serif;--i:'Inter',sans-serif;--m:'JetBrains Mono',monospace;
+}
+body{background:var(--white);color:var(--ink);font-family:var(--i);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);height:60px;display:flex;align-items:center;padding:0 var(--gut)}
+.nav-inner{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--r);font-size:20px;font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em}
+.nav-logo em{color:var(--mg);font-style:italic}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
+.nav-links a{font-family:var(--i);font-size:13px;color:var(--ink-2);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{color:var(--mg);background:var(--mg-pale)}
+.nav-links a.on{color:var(--mg);font-weight:500}
+.nav-cta{background:var(--mg)!important;color:var(--white)!important;font-weight:500;padding:8px 18px!important;border-radius:8px!important}
+.nav-cta:hover{background:var(--mg-2)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.burger span{width:22px;height:1.5px;background:var(--ink);display:block}
+.mob-nav{display:none;position:fixed;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--line);padding:16px var(--gut);z-index:99;flex-direction:column;gap:4px}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--i);font-size:14px;color:var(--ink-2);text-decoration:none;padding:10px 12px;border-radius:8px}
+
+.sec-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--m);font-size:11px;color:var(--mg);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.sec-tag::before{content:'';width:16px;height:1px;background:var(--mg)}
+h1,h2{font-family:var(--r);font-weight:800;color:var(--ink);letter-spacing:-.02em}
+h1{font-size:clamp(34px,4.5vw,52px);line-height:1.1;margin-bottom:18px}
+h1 em{color:var(--mg);font-style:italic}
+h2{font-size:clamp(24px,3vw,32px);line-height:1.15;margin-bottom:14px}
+h2 em{color:var(--mg);font-style:italic}
+
+/* HERO */
+#sthero{padding:130px 0 70px;background:linear-gradient(135deg,var(--white) 60%,var(--blush) 100%);position:relative;overflow:hidden}
+#sthero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(196,54,112,.08) 0%,transparent 70%);pointer-events:none}
+.sthero-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut);position:relative}
+.sthero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--mg-pale);color:var(--mg);font-family:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:22px;border:1px solid var(--mg-soft)}
+.sthero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mg)}
+.sthero-sub{font-family:var(--i);font-size:16px;font-weight:300;color:var(--ink-2);line-height:1.75;max-width:600px;margin-bottom:20px}
+.sthero-note{font-family:var(--i);font-size:14px;font-weight:400;color:var(--ink);background:var(--off);border:1px solid var(--line);border-radius:12px;padding:16px 20px;max-width:600px;line-height:1.7}
+.sthero-note strong{color:var(--mg)}
+
+/* PROJECT CARD */
+.proj-section{padding:64px 0}
+.proj-section:nth-child(even){background:var(--off)}
+.proj-inner{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+.proj-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.pchip{padding:5px 13px;border-radius:999px;font-family:var(--m);font-size:11px;font-weight:500;background:var(--mg-pale);color:var(--mg);border:1px solid var(--mg-soft)}
+.proj-desc{font-family:var(--i);font-size:15px;color:var(--ink-2);font-weight:300;line-height:1.8;max-width:760px;margin-bottom:8px}
+.proj-desc strong{font-weight:500;color:var(--ink)}
+
+/* stat row */
+.pstat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 8px}
+.pstat{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:18px 16px;text-align:center}
+.proj-section:nth-child(even) .pstat{background:var(--white)}
+.pstat-n{font-family:var(--r);font-size:24px;font-weight:800;color:var(--mg);letter-spacing:-.02em;line-height:1}
+.pstat-l{font-family:var(--i);font-size:11px;color:var(--ink-3);margin-top:4px;line-height:1.4}
+
+/* build timeline */
+.build-list{margin-top:28px;display:flex;flex-direction:column;gap:0}
+.build-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.build-item:last-child{border-bottom:none}
+.build-num{width:28px;height:28px;border-radius:8px;background:var(--mg-pale);border:1px solid var(--mg-soft);display:flex;align-items:center;justify-content:center;font-family:var(--r);font-size:12px;font-weight:800;color:var(--mg);flex-shrink:0;margin-top:1px}
+.build-title{font-family:var(--r);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.build-desc{font-family:var(--i);font-size:13px;color:var(--ink-2);font-weight:300;line-height:1.65}
+
+/* bugs / rigor callout */
+.rigor-box{background:var(--ink);border-radius:16px;padding:28px 30px;margin-top:32px}
+.rigor-tag{font-family:var(--m);font-size:10px;color:var(--mg-2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.rigor-list{display:flex;flex-direction:column;gap:12px}
+.rigor-row{font-family:var(--i);font-size:13px;color:rgba(255,255,255,.75);font-weight:300;line-height:1.65;padding-left:16px;position:relative}
+.rigor-row::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--mg-2)}
+.rigor-row strong{color:var(--white);font-weight:500}
+
+/* tab table (SDEF style) */
+.mtable{margin-top:28px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--white)}
+.mrow{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.mrow-h{font-family:var(--r);font-size:13px;font-weight:700;color:var(--mg);padding:14px 18px;background:var(--mg-pale);border-right:1px solid var(--line)}
+.mrow-d{font-family:var(--i);font-size:13px;color:var(--ink-2);font-weight:300;padding:14px 18px;line-height:1.6}
+
+/* PRODUCT MOCKUP PANELS */
+.mockup-wrap{margin-top:32px;border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(26,26,46,.14);border:1px solid var(--line)}
+.mockup-note{font-family:var(--m);font-size:10px;color:var(--ink-3);letter-spacing:.05em;text-align:center;margin-top:10px}
+
+/* CTA *//* CTA */
+#stcta{background:var(--mg);padding:72px 0}
+.stcta-inner{max-width:700px;margin:0 auto;padding:0 var(--gut);text-align:center}
+.stcta-h{font-family:var(--r);font-size:clamp(26px,3.5vw,36px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:14px;letter-spacing:-.02em}
+.stcta-p{font-family:var(--i);font-size:15px;color:rgba(255,255,255,.85);font-weight:300;line-height:1.75;margin-bottom:28px}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--mg);font-family:var(--r);font-size:14px;font-weight:700;padding:13px 28px;border-radius:10px;text-decoration:none;transition:all .2s}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+
+footer{background:var(--ink);padding:28px 0}
+.foot{max-width:var(--max);margin:0 auto;padding:0 var(--gut);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-logo{font-family:var(--r);font-size:18px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.foot-logo em{color:var(--mg-2);font-style:italic}
+.foot-copy{font-family:var(--m);font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.v{opacity:1;transform:none}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .pstat-row{grid-template-columns:1fr 1fr}
+  .mrow{grid-template-columns:1fr}
+
+  .mrow-h{border-right:none;border-bottom:1px solid var(--line)}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Kashish<em>.</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Social Media</a></li>
+      <li><a href="systems.html" class="on">Systems & Tools</a></li>
+      <li><a href="https://calendly.com/sociallykashish/15min" target="_blank" class="nav-cta">Book a call</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html">Social Media</a>
+  <a href="systems.html">Systems & Tools</a>
+  <a href="https://calendly.com/sociallykashish/15min" target="_blank">Book a call →</a>
+</div>
+
+<!-- HERO -->
+<section id="sthero">
+  <div class="sthero-inner">
+    <div class="sthero-tag">Systems & Tools</div>
+    <h1>I direct AI to build<br>tools businesses<br>actually <em>run on.</em></h1>
+    <p class="sthero-sub">Alongside social media strategy, I work with founders and domain experts to turn their manual processes — spreadsheets, paper forms, tribal knowledge — into working software. I don't write code line by line. I direct AI tools through the full build: defining requirements, catching bugs, testing against real data, and shipping something a team can actually use day to day.</p>
+    <div class="sthero-note">Below are two live examples: <strong>a fired heater inspection dashboard</strong> built for an engineering firm, and <strong>a scholarship application ledger</strong> built for an education foundation currently tracking 149 real applicants.</div>
+  </div>
+</section>
+
+<!-- PROJECT 1: FIS -->
+<section class="proj-section">
+  <div class="proj-inner">
+    <div class="proj-head reveal">
+      <div>
+        <div class="sec-tag">Case study 01</div>
+        <h2>FIS — Fired Heater Inspection<br>&amp; Surveillance <em>Dashboard.</em></h2>
+        <div class="proj-meta">
+          <span class="pchip">Engineering / Industrial</span>
+          <span class="pchip">Refineries & Petrochemical</span>
+          <span class="pchip">heatflux.com</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="proj-desc reveal"><strong>The problem:</strong> Fired heater inspections at refineries were run on paper — clipboards, spreadsheets, manual cross-referencing. Deviations were spotted days late, units confused Imperial and Metric readings, and there was no automatic report for engineering leadership. The client, a 50-year fired heater engineering veteran, had built the methodology by hand in Excel. It needed to become a tool his team could actually run in the field.</p>
+    <p class="proj-desc reveal"><strong>What we built:</strong> A single offline HTML dashboard covering 52 parameters across 11 monitoring sections, with a live Operator mode for shift rounds and an Engineer mode for periodic assessment. Every reading is checked in real time against Normal, Monitor, and Flag thresholds, with specific corrective action text attached to each one — not generic advice.</p>
+
+    <div class="pstat-row reveal">
+      <div class="pstat"><div class="pstat-n">52</div><div class="pstat-l">parameters tracked across 11 sections</div></div>
+      <div class="pstat"><div class="pstat-n">2</div><div class="pstat-l">unit systems, switchable in one click</div></div>
+      <div class="pstat"><div class="pstat-n">6</div><div class="pstat-l">cross-parameter diagnostic rules</div></div>
+      <div class="pstat"><div class="pstat-n">1</div><div class="pstat-l">file — runs offline, no login</div></div>
+    </div>
+
+    <div class="reveal">
+      <div class="mockup-wrap" style="border-radius:12px;box-shadow:0 12px 40px rgba(26,26,46,.14)">
+        <img src="ss-fis-entry.png" alt="FIS dashboard data entry screen showing combustion and draft monitoring parameters">
+      </div>
+      <div class="mockup-note">Live screenshot &middot; Data Entry tab &middot; Combustion &amp; Draft Monitoring section</div>
+    </div>
+    <div class="reveal" style="margin-top:20px">
+      <div class="mockup-wrap" style="border-radius:12px;box-shadow:0 12px 40px rgba(26,26,46,.14)">
+        <img src="ss-fis-report.png" alt="FIS dashboard automatic report screen with health score gauge and status charts">
+      </div>
+      <div class="mockup-note">Live screenshot &middot; Report &amp; Charts tab &middot; auto-generated from entered readings</div>
+    </div>
+
+    <div class="reveal">
+      <div class="build-list">
+        <div class="build-item">
+          <div class="build-num">1</div>
+          <div>
+            <div class="build-title">Encoded a 50-year methodology</div>
+            <div class="build-desc">Took the founder's Excel-based Heater Performance Index and built it into a live composite score — flow, distribution, oxygen, draft, and efficiency indices combined into one 0–1.000 health number.</div>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="build-num">2</div>
+          <div>
+            <div class="build-title">Direction-aware diagnostics</div>
+            <div class="build-desc">A high fan current means something different from a low one. Built logic so every deviation shows the specific corrective action for its direction — not one generic warning for both cases.</div>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="build-num">3</div>
+          <div>
+            <div class="build-title">Burner Cleanliness Index</div>
+            <div class="build-desc">Calculates expected burner tip pressure from the orifice flow equation and compares it to the actual measured pressure — diagnosing tip fouling or erosion without pulling a single burner.</div>
+          </div>
+        </div>
+        <div class="build-item">
+          <div class="build-num">4</div>
+          <div>
+            <div class="build-title">Automatic inspection reports</div>
+            <div class="build-desc">A full report tab with charts, a heater health gauge, flagged parameter tables, and an engineer sign-off block — generated automatically from whatever data has been entered.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rigor-box reveal">
+      <div class="rigor-tag">Bugs we actually caught and fixed</div>
+      <div class="rigor-list">
+        <div class="rigor-row"><strong>Temperature deviation math was wrong.</strong> A 20°F deviation was showing as -6.7°C instead of the correct 11.1°C — a sign-offset bug that would have misled every engineer reading it.</div>
+        <div class="rigor-row"><strong>Percentage deviations showed raw numbers.</strong> Fan current and efficiency deviations were displaying the raw difference instead of the percentage — fixed to the correct |actual−design|/design formula.</div>
+        <div class="rigor-row"><strong>Live inputs were reverting mid-keystroke.</strong> The action text for every parameter kept snapping back to generic advice after every keystroke — traced to a function that wasn't wired into the input handler.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 2: SDEF -->
+<section class="proj-section">
+  <div class="proj-inner">
+    <div class="proj-head reveal">
+      <div>
+        <div class="sec-tag">Case study 02</div>
+        <h2>SDEF India<br>Scholarship <em>Ledger.</em></h2>
+        <div class="proj-meta">
+          <span class="pchip">Education / Nonprofit</span>
+          <span class="pchip">Swami Dayanand Education Foundation</span>
+          <span class="pchip">Live — 149 applicants</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="proj-desc reveal"><strong>The problem:</strong> SDEF runs a Merit cum Means Scholarship program across India and Texas. The India side was fully manual — applications through Jotform, eligibility checked by hand, disbursement tracked across spreadsheets. The team needed something to take over the repetitive checking without losing the judgment calls that genuinely need a person.</p>
+    <p class="proj-desc reveal"><strong>What we built:</strong> A shared ledger that screens every applicant automatically against the foundation's published criteria — entrance exam rank, family income, grade marks, drop-year policy — while flagging anything ambiguous for a human to review rather than silently rejecting it.</p>
+
+    <div class="pstat-row reveal">
+      <div class="pstat"><div class="pstat-n">149</div><div class="pstat-l">real applicants screened, two cohorts</div></div>
+      <div class="pstat"><div class="pstat-n">5</div><div class="pstat-l">tabs: screening to disbursement</div></div>
+      <div class="pstat"><div class="pstat-n">3</div><div class="pstat-l">committee reviewers scoring independently</div></div>
+      <div class="pstat"><div class="pstat-n">2</div><div class="pstat-l">cohort rule sets held side by side</div></div>
+    </div>
+
+    <div class="reveal">
+      <div class="mockup-wrap" style="border-radius:12px;box-shadow:0 12px 40px rgba(26,26,46,.14)">
+        <img src="ss-sdef-screening.png" alt="SDEF scholarship ledger screening tab showing applicant eligibility checks">
+      </div>
+      <div class="mockup-note">Live screenshot &middot; Screening tab &middot; 2026&ndash;27 cohort</div>
+    </div>
+    <div class="reveal" style="margin-top:20px">
+      <div class="mockup-wrap" style="border-radius:12px;box-shadow:0 12px 40px rgba(26,26,46,.14)">
+        <img src="ss-sdef-reports.png" alt="SDEF scholarship ledger reports tab showing application funnel and breakdowns">
+      </div>
+      <div class="mockup-note">Live screenshot &middot; Reports tab &middot; funnel, financial summary &amp; breakdowns</div>
+    </div>
+
+    <div class="reveal">
+      <div class="mtable">
+        <div class="mrow"><div class="mrow-h">Screening</div><div class="mrow-d">Automatic eligibility checks against the active cohort's criteria — rank, income, marks, drop-year policy.</div></div>
+        <div class="mrow"><div class="mrow-h">Documents</div><div class="mrow-d">Every required document tracked as Missing, Received, or Verified. Five-stage pipeline from raw data to interview-ready.</div></div>
+        <div class="mrow"><div class="mrow-h">Committee Review</div><div class="mrow-d">Three reviewers score each applicant across four areas out of five. Conflict-of-interest flags exclude a reviewer without breaking the average.</div></div>
+        <div class="mrow"><div class="mrow-h">Disbursement Ledger</div><div class="mrow-d">Application status, payment status, and payment dates — bank and ID details tracked as a status flag only, never the actual numbers.</div></div>
+        <div class="mrow"><div class="mrow-h">Reports</div><div class="mrow-d">Application and payment funnel, financial summary, breakdowns by state, college, and course.</div></div>
+      </div>
+    </div>
+
+    <div class="rigor-box reveal">
+      <div class="rigor-tag">Where the judgment actually mattered</div>
+      <div class="rigor-list">
+        <div class="rigor-row"><strong>Rules changed between cohorts, not just numbers.</strong> JEE Main's cutoff moved, the drop-year allowance went from one year to none, and JEE Advanced was removed and later reinstated. The ledger holds both rule sets side by side so a change to one cohort never silently touches the other.</div>
+        <div class="rigor-row"><strong>Found a real discrepancy in self-reported data.</strong> Cross-checking self-reported marks against the underlying marksheet data surfaced one applicant whose numbers genuinely didn't match — exactly the kind of thing manual review misses at volume.</div>
+        <div class="rigor-row"><strong>Missing data gets flagged, never auto-rejected.</strong> The system is deliberately strict about catching borderline cases and putting them in front of a person, rather than guessing on incomplete information.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="stcta">
+  <div class="stcta-inner reveal">
+    <div class="stcta-h">Have a process that's still stuck<br>in spreadsheets or paper?</div>
+    <p class="stcta-p">If your team is manually tracking something that could run itself — applications, inspections, approvals, anything repetitive with real rules behind it — let's talk about what that could look like as a tool.</p>
+    <a href="https://calendly.com/sociallykashish/15min" target="_blank" class="btn-white">Book a free 15-min call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div class="foot-logo">Kashish<em>.</em></div>
+    <p class="foot-copy">© 2026 Kashish · Delhi</p>
+  </div>
+</footer>
+
+<script>
+const burger = document.getElementById('burger');
+const mobNav = document.getElementById('mobNav');
+burger.addEventListener('click', () => mobNav.classList.toggle('open'));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('v'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
